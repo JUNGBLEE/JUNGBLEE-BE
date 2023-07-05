@@ -12,5 +12,7 @@ import java.util.Optional;
 public interface QuizRepository extends JpaRepository<Quiz, Long> {
     Optional<Quiz> findAllByUser(User user);
 
-    List<Quiz> findAllByUserAndSuccessful(User user, boolean successful);
+    List<Quiz> findAllByUserAndSuccessfulOrderByIdDesc(User user, boolean successful);
+
+    List<Quiz> findTop3ByUserOrderByIdDesc(User user);
 }

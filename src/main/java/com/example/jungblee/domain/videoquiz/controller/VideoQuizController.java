@@ -23,7 +23,7 @@ public class VideoQuizController {
     }
 
     @GetMapping("/{videoQuizId}")
-    public VideoQuizMaximumResponse videoQuizList(
+    public VideoQuizMaximumResponse videoQuizDetails(
             @PathVariable Long videoQuizId
     ) {
         return videoQuizService.findVideoQuiz(videoQuizId);

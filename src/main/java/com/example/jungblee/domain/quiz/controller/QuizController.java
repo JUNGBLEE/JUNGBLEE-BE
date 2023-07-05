@@ -39,4 +39,9 @@ public class QuizController {
     public QuizListResponse failedQuizList() {
         return quizService.findFailedQuizList();
     }
+
+    @GetMapping("/top3")
+    public QuizListResponse top3List() {
+        return quizService.findTop3ByUser();
+    }
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
-@RequestMapping("/video-quiz")
+@RequestMapping("/video-quiz/opinion")
 @RestController
 public class VideoQuizOpinionController {
 

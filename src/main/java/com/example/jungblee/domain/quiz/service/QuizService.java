@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -55,7 +54,7 @@ public class QuizService {
 
         User user = userFacade.currentUser();
 
-        List<Quiz> quizList = quizRepository.findAllByUserAndSuccessful(user, true);
+        List<Quiz> quizList = quizRepository.findAllByUserAndSuccessfulOrderByIdDesc(user, true);
         if (quizList == null)
             return null;
 
@@ -67,10 +66,26 @@ public class QuizService {
     }
 
     @Transactional(readOnly = true)
+    public QuizListResponse findTop3ByUser() {
+
+        User user = userFacade.currentUser();
+
+        List<Quiz> quizList = quizRepository.findTop3ByUserOrderByIdDesc(user);
+        if (quizList == null)
+            return null;
+
+        return new QuizListResponse(
+                quizList
+                        .stream()
+                        .map(QuizResponse::of)
+                        .toList());
+    }
+
+    @Transactional(readOnly = true)
     public QuizListResponse findFailedQuizList() {
 
         User user = userFacade.currentUser();
-        List<Quiz> quizList = quizRepository.findAllByUserAndSuccessful(user, false);
+        List<Quiz> quizList = quizRepository.findAllByUserAndSuccessfulOrderByIdDesc(user, false);
 
         return new QuizListResponse(
                 quizList

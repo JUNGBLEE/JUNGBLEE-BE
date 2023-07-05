@@ -4,7 +4,7 @@ import com.example.jungblee.domain.user.entity.User;
 import com.example.jungblee.domain.user.service.UserFacade;
 import com.example.jungblee.domain.videoquiz.controller.dto.request.VideoQuizOpinionCreateRequest;
 import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizOpinionListResponse;
-import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizOpinionListResponse.VideoQuizOpinionResponse;
+import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizOpinionResponse;
 import com.example.jungblee.domain.videoquiz.entity.VideoQuiz;
 import com.example.jungblee.domain.videoquiz.entity.VideoQuizOpinion;
 import com.example.jungblee.domain.videoquiz.repository.VideoQuizOpinionRepository;
@@ -48,7 +48,7 @@ public class VideoQuizOpinionService {
 
         User user = userFacade.currentUser();
 
-        List<VideoQuizOpinionResponse> videoQuizOpinionResponseList = videoQuizOpinionRepository.findAllByVideoQuiz(videoQuiz)
+        List<VideoQuizOpinionResponse> videoQuizOpinionResponseList = videoQuizOpinionRepository.findAllByVideoQuizOrderByIdDesc(videoQuiz)
                 .stream()
                 .map(videoQuizOpinion ->
                         VideoQuizOpinionResponse.builder()

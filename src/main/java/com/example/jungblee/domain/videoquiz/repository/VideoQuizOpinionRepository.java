@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface VideoQuizOpinionRepository extends JpaRepository<VideoQuizOpinion, Long> {
 
-    List<VideoQuizOpinion> findAllByVideoQuiz(VideoQuiz videoQuiz);
+    List<VideoQuizOpinion> findAllByVideoQuizOrderByIdDesc(VideoQuiz videoQuiz);
 }

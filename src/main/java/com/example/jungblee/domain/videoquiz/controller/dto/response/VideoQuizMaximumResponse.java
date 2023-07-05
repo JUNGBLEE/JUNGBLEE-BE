@@ -37,6 +37,6 @@ public class VideoQuizMaximumResponse {
                 .photo(videoQuiz.getPhoto())
                 .answer(videoQuiz.getAnswer())
                 .issuedAt(videoQuiz.getIssuedAt())
-                .build();
+                    .build();
     }
 }

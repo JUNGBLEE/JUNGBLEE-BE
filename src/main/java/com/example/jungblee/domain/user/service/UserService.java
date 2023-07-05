@@ -66,8 +66,8 @@ public class UserService {
         return UserResponse.builder()
                 .username(user.getUsername())
                 .accountId(user.getAccountId())
-                .successQuizCount(quizRepository.findAllByUserAndSuccessful(user, true).size())
-                .failedQuizCount(quizRepository.findAllByUserAndSuccessful(user, false).size())
+                .successQuizCount(quizRepository.findAllByUserAndSuccessfulOrderByIdDesc(user, true).size())
+                .failedQuizCount(quizRepository.findAllByUserAndSuccessfulOrderByIdDesc(user, false).size())
                 .build();
     }
 }

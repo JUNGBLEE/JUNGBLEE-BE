@@ -19,6 +19,8 @@ public class QuizResponse {
 
     private final boolean isMultipleChose;
 
+    private final boolean successful;
+
     private final String optionA;
 
     private final String optionB;
@@ -27,13 +29,17 @@ public class QuizResponse {
 
     private final String optionD;
 
-    private final boolean successful;
-
     private final String accountId;
 
     public static QuizResponse of(
             Quiz quiz
     ) {
+        String accId;
+
+        if (quiz.getUser() == null)
+            accId = null;
+        else
+            accId = quiz.getUser().getAccountId();
 
         if (quiz.isMultipleChose()) {
             return QuizResponse.builder()
@@ -43,7 +49,7 @@ public class QuizResponse {
                     .answer(quiz.getAnswer())
 
                     .successful(quiz.isSuccessful())
-                    .accountId(quiz.getUser().getAccountId())
+                    .accountId(accId)
 
                     .isMultipleChose(true)
                     .optionA(quiz.getOptionA())
@@ -60,7 +66,7 @@ public class QuizResponse {
                 .answer(quiz.getAnswer())
 
                 .successful(quiz.isSuccessful())
-                .accountId(quiz.getUser().getAccountId())
+                .accountId(accId)
 
                 .isMultipleChose(false)
                 .build();
