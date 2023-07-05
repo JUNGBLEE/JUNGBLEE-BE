@@ -10,7 +10,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
 
 jwt:
   secret-key: ${JWT_SECRET}

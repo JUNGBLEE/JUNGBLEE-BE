@@ -1,8 +1,10 @@
 package com.example.jungblee.domain.user.service;
 
 import com.example.jungblee.domain.auth.controller.dto.response.TokenResponse;
+import com.example.jungblee.domain.quiz.repository.QuizRepository;
 import com.example.jungblee.domain.user.controller.dto.request.LoginRequest;
 import com.example.jungblee.domain.user.controller.dto.request.SignupRequest;
+import com.example.jungblee.domain.user.controller.dto.response.UserResponse;
 import com.example.jungblee.domain.user.entity.User;
 import com.example.jungblee.domain.user.repository.UserRepository;
 import com.example.jungblee.global.security.jwt.JwtTokenProvider;
@@ -15,16 +17,23 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
 
+    private final QuizRepository quizRepository;
+
     private final UserRepository userRepository;
 
+    private final UserFacade userFacade;
+
     private final PasswordEncoder passwordEncoder;
+
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
     public void
     signup(SignupRequest request) {
 
-        System.out.println(request.getAccountId());
+        if (userRepository.existsByAccountId(request.getAccountId()))
+            throw new RuntimeException();
+
         userRepository.save(
                 User.builder()
                         .username(request.getUsername())
@@ -47,5 +56,18 @@ public class UserService {
         String access = jwtTokenProvider.generateAccessToken(loginRequest.getAccountId());
 
         return new TokenResponse(access);
+    }
+
+    @Transactional(readOnly = true)
+    public UserResponse myPage() {
+
+        User user = userFacade.currentUser();
+
+        return UserResponse.builder()
+                .username(user.getUsername())
+                .accountId(user.getAccountId())
+                .successQuizCount(quizRepository.findAllByUserAndSuccessful(user, true).size())
+                .failedQuizCount(quizRepository.findAllByUserAndSuccessful(user, false).size())
+                .build();
     }
 }
