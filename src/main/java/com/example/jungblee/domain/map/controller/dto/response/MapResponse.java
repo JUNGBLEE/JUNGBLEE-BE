@@ -14,13 +14,9 @@ public class MapResponse {
 
     private double longitude;
 
-    private int casualties;
+    private int caseCount;
 
-    private String type;
-
-    private int attackerAge;
-
-    private int victimAge;
+    private String casualty;
 
     public static MapResponse of(
             Map map
@@ -30,10 +26,8 @@ public class MapResponse {
                 .id(map.getId())
                 .latitude(map.getLatitude())
                 .longitude(map.getLongitude())
-                .casualties(map.getCasualties())
-                .type(map.getType())
-                .attackerAge(map.getAttackerAge())
-                .victimAge(map.getVictimAge())
+                .caseCount(map.getCaseCount())
+                .casualty(map.getCasualty())
                 .build();
     }
 }

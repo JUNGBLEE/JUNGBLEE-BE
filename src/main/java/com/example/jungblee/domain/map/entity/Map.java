@@ -22,15 +22,12 @@ public class Map {
     @Column(name = "longitude")
     private double longitude;
 
-    @Column(name = "casualties")
-    private int casualties;
+    @Column(name = "cace_count")
+    private int caseCount;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "casualty")
+    private String casualty;
 
     @Column(name = "attacker_age")
     private int attackerAge;
-
-    @Column(name = "victim_age")
-    private int victimAge;
 }

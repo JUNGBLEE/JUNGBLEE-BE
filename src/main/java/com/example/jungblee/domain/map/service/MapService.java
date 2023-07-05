@@ -31,12 +31,3 @@ public class MapService {
         return new MapListResponse(mapResponseList);
     }
 }
-
-
-/*
-    mapList: {
-        map: {
-
-        },
-    }
- */
