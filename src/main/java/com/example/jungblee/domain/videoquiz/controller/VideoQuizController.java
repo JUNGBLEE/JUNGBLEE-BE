@@ -1,14 +1,11 @@
 package com.example.jungblee.domain.videoquiz.controller;
 
-import com.example.jungblee.domain.videoquiz.controller.dto.request.VideoQuizOpinionCreateRequest;
+import com.example.jungblee.domain.videoquiz.controller.dto.request.VideoQuizTeamSelectRequest;
 import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizListResponse;
 import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizMaximumResponse;
-import com.example.jungblee.domain.videoquiz.service.VideoQuizOpinionService;
 import com.example.jungblee.domain.videoquiz.service.VideoQuizService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RequestMapping("/video-quiz")
@@ -29,17 +26,11 @@ public class VideoQuizController {
         return videoQuizService.findVideoQuiz(videoQuizId);
     }
 
-    @PostMapping("/{videoQuizId}/a")
-    public void selectTeamA(
-            @PathVariable Long videoQuizId
-    ) {
-        videoQuizService.selectTeamA(videoQuizId);
-    }
-
-    @PostMapping("/{videoQuizId}/b")
+    @PostMapping("/{videoQuizId}")
     public void selectTeamB(
-            @PathVariable Long videoQuizId
+            @PathVariable Long videoQuizId,
+            @RequestBody VideoQuizTeamSelectRequest request
     ) {
-        videoQuizService.selectTeamB(videoQuizId);
+        videoQuizService.selectTeam(videoQuizId, request);
     }
 }

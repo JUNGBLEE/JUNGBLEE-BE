@@ -1,10 +1,10 @@
 package com.example.jungblee.domain.videoquiz.service;
 
-import com.example.jungblee.domain.videoquiz.controller.dto.request.VideoQuizOpinionCreateRequest;
+import com.example.jungblee.domain.videoquiz.controller.dto.request.VideoQuizTeamSelectRequest;
 import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizListResponse;
 import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizMaximumResponse;
 import com.example.jungblee.domain.videoquiz.controller.dto.response.VideoQuizMinimumResponse;
-import com.example.jungblee.domain.videoquiz.entity.VideoQuizOpinion;
+import com.example.jungblee.domain.videoquiz.entity.VideoQuiz;
 import com.example.jungblee.domain.videoquiz.repository.VideoQuizOpinionRepository;
 import com.example.jungblee.domain.videoquiz.repository.VideoQuizRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,20 +39,16 @@ public class VideoQuizService {
     }
 
     @Transactional
-    public void selectTeamA(
-            Long videoQuizId
+    public void selectTeam(
+            Long videoQuizId,
+            VideoQuizTeamSelectRequest request
     ) {
-        videoQuizRepository.findById(videoQuizId)
-                .orElseThrow(() -> new RuntimeException())
-                .selectTeamA();
-    }
 
-    @Transactional
-    public void selectTeamB(
-            Long videoQuizId
-    ) {
-        videoQuizRepository.findById(videoQuizId)
-                .orElseThrow(() -> new RuntimeException())
-                .selectTeamB();
+        VideoQuiz videoQuiz = videoQuizRepository.findById(videoQuizId)
+                .orElseThrow(() -> new RuntimeException());
+        if (request.isTeam())
+            videoQuiz.selectTeamA();
+        else
+            videoQuiz.selectTeamB();
     }
 }
