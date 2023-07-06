@@ -55,7 +55,7 @@ public class QuizService {
         User user = userFacade.currentUser();
 
         return new QuizListResponse(
-                user.getQuizList()
+                quizRepository.findAll()
                 .stream()
                 .map(QuizResponse::of)
                 .toList());
