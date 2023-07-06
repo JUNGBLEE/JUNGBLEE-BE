@@ -54,12 +54,8 @@ public class QuizService {
 
         User user = userFacade.currentUser();
 
-        List<Quiz> quizList = quizRepository.findAllByUserAndSuccessfulOrderByIdDesc(user, true);
-        if (quizList == null)
-            return null;
-
         return new QuizListResponse(
-                quizList
+                user.getQuizList()
                 .stream()
                 .map(QuizResponse::of)
                 .toList());
