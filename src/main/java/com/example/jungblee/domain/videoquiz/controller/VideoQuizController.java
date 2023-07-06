@@ -28,4 +28,18 @@ public class VideoQuizController {
     ) {
         return videoQuizService.findVideoQuiz(videoQuizId);
     }
+
+    @PostMapping("/{videoQuizId}/a")
+    public void selectTeamA(
+            @PathVariable Long videoQuizId
+    ) {
+        videoQuizService.selectTeamA(videoQuizId);
+    }
+
+    @PostMapping("/{videoQuizId}/b")
+    public void selectTeamB(
+            @PathVariable Long videoQuizId
+    ) {
+        videoQuizService.selectTeamB(videoQuizId);
+    }
 }

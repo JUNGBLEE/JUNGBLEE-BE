@@ -37,4 +37,22 @@ public class VideoQuizService {
                 videoQuizRepository.findById(videoQuizId)
                         .orElseThrow(() -> new RuntimeException()));
     }
+
+    @Transactional
+    public void selectTeamA(
+            Long videoQuizId
+    ) {
+        videoQuizRepository.findById(videoQuizId)
+                .orElseThrow(() -> new RuntimeException())
+                .selectTeamA();
+    }
+
+    @Transactional
+    public void selectTeamB(
+            Long videoQuizId
+    ) {
+        videoQuizRepository.findById(videoQuizId)
+                .orElseThrow(() -> new RuntimeException())
+                .selectTeamB();
+    }
 }

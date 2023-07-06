@@ -1,5 +1,6 @@
 package com.example.jungblee.domain.videoquiz.entity;
 
+import com.example.jungblee.domain.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,9 +34,25 @@ public class VideoQuiz {
 
     @Column(name = "issuedAt", nullable = false)
     private LocalDate issuedAt;
-/*
-    @OneToMany(mappedBy = "video_quiz")
-    private List<VideoQuizOpinion> opinionList;*/
+
+    @Column(name = "team_a")
+    private int teamA = 0;
+
+    @Column(name = "team_b")
+    private int teamB = 0;
+
+    public void selectTeamA() {
+        if (this.teamB >= 1)
+            teamB = 0;
+
+        this.teamA = 1;
+    }
+
+    public void selectTeamB() {
+        if (this.teamA >= 1)
+            teamA = 0;
+        this.teamB = 1;
+    }
 
     @Builder
     public VideoQuiz(

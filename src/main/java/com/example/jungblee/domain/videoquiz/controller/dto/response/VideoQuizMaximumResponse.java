@@ -25,6 +25,10 @@ public class VideoQuizMaximumResponse {
 
     private final LocalDate issuedAt;
 
+    private final int teamA;
+
+    private final int teamB;
+
     private final List<VideoQuizOpinion> opinionList;
 
     public static VideoQuizMaximumResponse of(
@@ -37,6 +41,8 @@ public class VideoQuizMaximumResponse {
                 .photo(videoQuiz.getPhoto())
                 .answer(videoQuiz.getAnswer())
                 .issuedAt(videoQuiz.getIssuedAt())
-                    .build();
+                .teamA(videoQuiz.getTeamA())
+                .teamB(videoQuiz.getTeamB())
+                .build();
     }
 }
