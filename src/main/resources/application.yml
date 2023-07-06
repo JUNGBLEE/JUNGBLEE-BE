@@ -17,3 +17,6 @@ jwt:
   access-exp: ${JWT_ACCESS_EXP}
   header: ${JWT_HEADER}
   prefix: ${JWT_PREFIX}
+
+server:
+  port: 8888
